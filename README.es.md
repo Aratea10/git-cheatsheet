@@ -1,4 +1,3 @@
-<!-- README.es.md -->
 # 📝 Hoja Chuleta de Git
 
 Una guía rápida y clara de los comandos más comunes de Git con sus explicaciones.
