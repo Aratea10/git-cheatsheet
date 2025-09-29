@@ -1,13 +1,11 @@
 # 🌍 Git Cheatsheet / Hoja Chuleta de Git
 
-<p align="center">
-  <a href="https://git-scm.com/">
-    <img src="https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white" alt="Git" />
-  </a>
-  <a href="https://github.com/">
-    <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white" alt="GitHub" />
-  </a>
-</p>
+<div align="center">
+
+  ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+  ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+  
+</div>
 
 Choose your language / Elige tu idioma:
 - [English version](README.en.md)
