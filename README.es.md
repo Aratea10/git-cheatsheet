@@ -7,62 +7,259 @@ Una guía rápida y clara de los comandos más comunes de Git con sus explicacio
 ## 🔧 Configuración Inicial
 | Comando | Descripción |
 |--------|-------------|
-| `git config --global user.name "[nombre]"` | Configura el nombre de usuario global para los commits. |
-| `git config --global user.email "[email]"` | Configura el email global para los commits. |
+| `git config --global user.name "Tu Nombre"` | Define tu nombre para los commits. |
+| `git config --global user.email "tu@email"` | Define tu email para los commits. |
+| `git config --global init.defaultBranch main` | Establece “main” como rama principal por defecto. |
+| `git config --global color.ui auto` | Activa colores en la línea de comandos. | 
+| `git config --global core.editor "code --wait"` | Define VS Code como editor para mensajes de commit, rebase, etc. |
+| `git config --global alias.st "status -sb"` | Alias útiles: estado corto. |
+| `git config --global alias.lg "log --oneline --graph --decorate --all"` | Alias: historial resumido y visual. |
 
-## 🗂️ Iniciar y Clonar Repositorios
-| Comando | Descripción |
-|--------|-------------|
-| `git init` | Inicializa un nuevo repositorio de Git en el directorio actual. |
-| `git clone [url]` | Clona (copia) un repositorio remoto en tu máquina local. |
-
-## 📤 Staging y Commits
-| Comando | Descripción |
-|--------|-------------|
-| `git add [archivo]` | Agrega un archivo específico al área de staging (preparación para commit). |
-| `git add .` | Agrega todos los archivos modificados y nuevos al área de staging. |
-| `git status` | Muestra el estado actual del repositorio: archivos modificados, en staging, sin seguimiento, etc. |
-| `git commit -m "mensaje"` | Crea un nuevo commit con los cambios del área de staging y un mensaje descriptivo. |
-
-## 🔍 Ver Historial y Diferencias
-| Comando | Descripción |
-|--------|-------------|
-| `git log` | Muestra el historial de commits del repositorio. |
-| `git diff` | Muestra las diferencias entre el directorio de trabajo y el área de staging. |
-| `git diff --staged` | Muestra las diferencias entre el área de staging y el último commit. |
-
-## 🌿 Ramas (Branches)
-| Comando | Descripción |
-|--------|-------------|
-| `git branch` | Lista todas las ramas locales. |
-| `git branch [nombre]` | Crea una nueva rama con el nombre especificado. |
-| `git branch -d [nombre]` | Elimina la rama especificada (solo si ya ha sido fusionada). |
-| `git checkout [rama]` | Cambia a la rama especificada. |
-| `git checkout [commit]` | Cambia al estado del repositorio en un commit específico (modo "detached HEAD"). |
-| `git checkout -- [archivo]` | Descarta los cambios locales en un archivo específico (restaura desde el último commit). |
-| `git merge [rama]` | Fusiona la rama especificada con la rama actual. |
-
-## ☁️ Trabajo con Repositorios Remotos
-| Comando | Descripción |
-|--------|-------------|
-| `git remote -v` | Muestra las URLs de los repositorios remotos configurados. |
-| `git pull` | Obtiene los cambios del repositorio remoto y los fusiona con la rama local. |
-| `git push` | Envía los commits locales al repositorio remoto. |
-| `git push origin [rama]` | Envía la rama local especificada al repositorio remoto (`origin`). |
-
-## 🔄 Deshacer Cambios y Guardar Temporalmente
-| Comando | Descripción |
-|--------|-------------|
-| `git reset [archivo]` | Elimina un archivo del área de staging, pero mantiene los cambios en el directorio de trabajo. |
-| `git reset --hard` | Descarta todos los cambios en el directorio de trabajo y el área de staging, volviendo al último commit. |
-| `git stash` | Guarda temporalmente los cambios no confirmados para que puedas cambiar de rama o hacer otras operaciones. |
-| `git stash pop` | Recupera y aplica los cambios guardados con `git stash`. |
-
-## 🏷️ Etiquetas (Tags)
-| Comando | Descripción |
-|--------|-------------|
-| `git tag [nombre]` | Crea una etiqueta (tag) en el commit actual, útil para marcar versiones. |
+> Ver configuración: `git config --list --show-origin`
 
 ---
 
-> 💡 **Consejo**: Usa `git help [comando]` o `git [comando] --help` para obtener ayuda detallada sobre cualquier comando.
+## 🗂️ Iniciar y clonar repos
+| Comando | Descripción |
+|--------|-------------|
+| `git init` | Crea un repo Git en la carpeta actual. |
+| `git clone <url>` | Clona un repo remoto. |
+| `git remote -v` | Muestra remotos configurados. |
+| `git remote add origin <url>` | Añade remoto “origin”. |
+| `git remote set-url origin <url>` | Cambia la URL del remoto. |
+
+---
+
+## 📦 Ciclo básico: status → add → commit
+| Comando | Descripción |
+|--------|-------------|
+| `git status` | Muestra estado del repositorio. |
+| `git status -sb` | Estado breve. |
+| `git diff` | Diferencias no preparadas. |
+| `git diff --staged` | Diferencias preparadas para commit. |
+| `git add <archivo>` | Añade archivo al staging. |
+| `git add .` | Añade todos los cambios. |
+| `git reset <archivo>` | Quita del staging, conserva cambios. |
+| `git commit -m "mensaje"` | Crea un commit. |
+| `git commit -am "mensaje"` | Añade y comitea archivos ya trackeados. |
+| `git commit --amend -m "nuevo mensaje"` | Edita el último commit. |
+
+Sugerencias para mensajes:
+- Línea 1: resumen imperativo breve.
+- Línea 2: en blanco.
+- Líneas siguientes: detalle y contexto si aplica.
+
+---
+
+## 🔍 Historial y búsqueda
+| Comando | Descripción |
+|--------|-------------|
+| `git log --oneline` | Historial resumido. |
+| `git log --oneline --graph --decorate --all` | Historial visual. |
+| `git log -- <archivo>` | Historial de un archivo. |
+| `git blame <archivo>` | Quién cambió cada línea. |
+| `git reflog` | Registro de movimientos del HEAD. |
+
+---
+
+## 🌿 Ramas
+| Comando | Descripción |
+|--------|-------------|
+| `git branch` | Lista ramas locales. |
+| `git branch -r` | Lista ramas remotas. |
+| `git switch <rama>` | Cambia de rama. |
+| `git switch -c <rama>` | Crea y cambia a una nueva rama. |
+| `git branch -m <nuevo>` | Renombra la rama actual. |
+| `git branch -d <rama>` | Borra rama fusionada. |
+| `git branch -D <rama>` | Borra rama forzando. |
+| `git push -u origin <rama>` | Publica rama y establece seguimiento. |
+| `git switch --detach <hash>` | Cambia a un commit específico (detached HEAD). |
+
+---
+
+## 🔀 Integración: merge y rebase
+| Comando | Descripción |
+|--------|-------------|
+| `git merge <rama>` | Fusiona la rama en la rama actual. |
+| `git rebase <rama>` | Reaplica commits encima de otra rama. |
+| `git rebase -i origin/main` | Rebase interactivo para ordenar o “squash”. |
+| `git merge --abort` | Aborta un merge en conflicto. |
+| `git rebase --abort` | Aborta un rebase. |
+| `git merge --continue` | Continúa tras resolver conflictos. |
+| `git rebase --continue` | Continúa rebase tras conflictos. |
+
+Consejo:
+- Rebase: historial lineal antes de un PR.
+- Merge: conserva la historial tal cual sucedió.
+
+---
+
+## ☁️ Remotos: fetch, pull, push
+| Comando | Descripción |
+|--------|-------------|
+| `git fetch` | Trae referencias remotas sin integrar. |
+| `git pull` | Fetch + merge en la rama actual. |
+| `git pull --rebase` | Fetch + rebase para historial limpio. |
+| `git push` | Envía commits al remoto. |
+| `git push -u origin <rama>` | Primer push y set de upstream. |
+| `git push origin --delete <rama>` | Borra rama remota. |
+
+---
+
+## 🔄 Deshacer y recuperar
+| Comando | Descripción |
+|--------|-------------|
+| `git reset <archivo>` | Saca del staging, conserva cambios. |
+| `git reset --hard HEAD` | Deshace cambios locales y staging hasta el último commit. |
+| `git revert <hash>` | Crea un commit inverso seguro. |
+| `git restore <archivo>` | Restaura archivo desde último commit. |
+| `git restore --staged <archivo>` | Quita archivo del staging. |
+
+Cuándo usar:
+- `revert`: seguro en ramas compartidas.
+- `reset --hard`: destructivo, úsalo con cuidado.
+- `restore`: para archivos específicos.
+
+---
+
+## 💼 Stash
+| Comando | Descripción |
+|--------|-------------|
+| `git stash push -m "WIP mensaje"` | Guarda cambios no confirmados. |
+| `git stash -u` | Incluye archivos no trackeados. |
+| `git stash list` | Lista stashes. |
+| `git stash pop` | Aplica y elimina el último stash. |
+| `git stash apply stash@{n}` | Aplica stash sin eliminarlo. |
+| `git stash drop stash@{n}` | Borra un stash concreto. |
+| `git stash clear` | Borra todos los stashes. |
+
+---
+
+## 🏷️ Tags
+| Comando | Descripción |
+|--------|-------------|
+| `git tag v1.0.0` | Crea un tag ligero. |
+| `git tag -a v1.0.0 -m "mensaje"` | Crea un tag anotado. |
+| `git tag --list` | Lista tags. |
+| `git show v1.0.0` | Muestra detalles del tag. |
+| `git push origin v1.0.0` | Envía un tag al remoto. |
+| `git push --tags` | Envía todos los tags. |
+| `git tag -d v1.0.0` | Borra tag local. |
+| `git push origin :refs/tags/v1.0.0` | Borra tag remoto. |
+
+---
+
+## 🧹 .gitignore y limpieza
+| Comando | Descripción |
+|--------|-------------|
+| Crear `.gitignore` | Define archivos y carpetas a ignorar. |
+| `git config --global core.excludesfile ~/.gitignore_global` | Ignora patrones globalmente. |
+| `git clean -n` | Previsualiza limpiaza de no trackeados. |
+| `git clean -fd` | Elimina no trackeados y directorios. |
+
+Ejemplo `.gitignore`:
+````
+node_modules/
+dist/
+.env
+.DS_Store
+````
+
+
+---
+
+## 🔐 GitHub por SSH
+| Comando | Descripción |
+|--------|-------------|
+| `ssh-keygen -t ed25519 -C "tu@email"` | Genera una clave SSH moderna. |
+| `eval "$(ssh-agent -s)"` | Inicia el agente SSH. |
+| `ssh-add ~/.ssh/id_ed25519` | Añade tu clave al agente. |
+| Copia la pública | `cat ~/.ssh/id_ed25519.pub` y pégala en GitHub → Settings → SSH and GPG keys. |
+| `ssh -T git@github.com` | Prueba la conexión SSH. |
+
+---
+
+## 🧭 Recetas rápidas
+Inicializar repo y primer push:
+```bash
+git init
+git add .
+git commit -m "init"
+git branch -M main
+git remote add origin git@github.com:usuario/repo.git
+git push -u origin main
+```
+
+Actualizar un fork desde upstream:
+```bash
+git remote add upstream git@github.com:ORIGINAL/REPO.git
+git fetch upstream
+git switch main
+git merge upstream/main # o: git rebase upstream/main
+git push
+```
+
+Squash antes de un PR:
+```bash
+git switch feature
+git rebase -i origin/main # marca commits como squash/fixup
+git push --force-with-lease
+```
+
+Revertir un merge:
+```bash
+git log --oneline
+git revert -m 1 <hash_merge> # -m indica el padre principal
+git push
+```
+
+---
+
+# 💡 Ayuda
+| Comando | Descripción |
+|--------|-------------|
+| `git help <comando>` | Manual oficial en tu terminal. |
+| `<comando> --help` | Ayuda detallada del comando. |
+| Leer `git status` | Suele sugerir el siguiente paso. |
+
+---
+
+# 📚 Glosario
+- **Branch (rama)**: línea de trabajo independiente dentro del repo. Permite desarrollar sin afectar a main.
+- **Checkout / Switch**: cambiarte a otra rama o versión concreta de los archivos. Hoy se prefiere `git switch`.
+- **Cherry-pick**: aplicar un commit específico de otra rama en la rama actual.
+- **Clone (clonar)**: descargar un repositorio remoto a tu ordenador con su historial.
+- **Commit**: foto de los cambios en un momento dddo con un mensaje que los describe.
+- **Conflicto**: cuando Git no puede mezclar cambios automáticamente y te pide elegir qué queda.
+- **Diff**: diferencias entre dos versiones de archivos o commits.
+- **Etiqueta (tag)**: marca un commit importante, normalmente una versión, para localizarlo rápido.
+- **Fast-forward**: merge "directo" sin commit de merge porque la rama estaba alineada.
+- **Fetch**: traer cambios del remoto sin mezclarlos todavía en tu rama local.
+- **Fork**: copia de un repo en tu cuenta (en GitHub) para trabajar de forma independiente.
+- **HEAD**: apuntador a tu posición actual en la historia. Normalmente al último commit de tu rama.
+- **Historia (log)**: lista de commits realizados en el repo.
+- **Hooks**: scripts que se ejecutan automáticamente ante eventos de Git, como antes de un commit.
+- **Merge (fusionar)**: unir el trabajo de una rama en otra. Puede crear un commit de merge.
+- **Origen (origin)**: nombre por defecto del remoto principal de tu repo.
+- **Pull**: `fetch + merge`o `fetch + rebase`. Trae y combina cambios del remoto.
+- **Pull Request (PR)**: propuesta de cambios para revisar y fusionar en un repo (función de plataformas como GitHub.)
+- **Push**: enviar tus commits locales al repositorio remoto.
+- **Rebase**: reaplicar tus commits "encima" de otra rama para tener un historial lineal.
+- **Rebase interactivo**: rebase con edición de la lista de commits para reordenar, renombrar o "squashear".
+- **Release**: publicación de una versión, normalmente asociada a un tag y notas de cambios.
+- **Remote (remoto)**: versión del repo alojada en un servidor o plataforma (GitHub, GitLab).
+- **Repo (repositorio)**: carpeta con tus archivos y una base de datos interna con su historial.
+- **Restore**: recuperar archivos desde el último commit o sacar archivos del staging.
+- **Revert**: crear un commit que deshace los cambios de un commit anterior sin reescribir historia.
+- **Reset**: mover la referencia de la rama a otro commit. Con `--hard`también cambia archivos y staging.
+- **Reflog**: registro local de "a dónde apuntó HEAD" recientemente. Útil para recuperar estados.
+- **SHA (hash)**: identificador único de un commit, como una "matrícula" del cambio.
+- **Squash**: combinar varios commits en uno para dejar la historia más limpia.
+- **Stash**: guardar temporalmente cambios sin comitear para "hacer hueco" y retomarlos luego.
+- **Stage / Staging (índice)**: zona intermedia donde preparas qué se incluirá en el próximo commit.
+- **Submódulo**: enlazar otro repo dentro de tu repo como dependencia versionada.
+- **Tracking branch (rama de seguimiento)**: rama local conectada a una rama remota para hacer pull y push fácilmente.
+- **Upstream**: remoto "fuente" del que derivaste (por ejemplo, el repo original si trabajas en un fork).
+- **Working directory**: tus archivos en el disco tal y como los estás editando.
+- **.gitignore**: lista de archivos y carpetas que Git debe ignorar y no versionar.
+- **Git LFS**: sistema para versionar archivos grandes sin inflar el repo principal.
