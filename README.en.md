@@ -2,6 +2,7 @@
 A quick and clear reference guide to the most common Git commands with explanations.
 
 ---
+<br>
 
 ## 🔧 Initial Setup
 | Command | Description |
