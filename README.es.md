@@ -3,6 +3,7 @@
 Una guía rápida y clara de los comandos más comunes de Git con sus explicaciones.
 
 ---
+<br>
 
 ## 🔧 Configuración Inicial
 | Comando | Descripción |
