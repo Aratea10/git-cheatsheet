@@ -7,155 +7,145 @@ Una guía rápida y clara de los comandos más comunes de Git con sus explicacio
 ## 🔧 Configuración Inicial
 | Comando | Descripción |
 |--------|-------------|
-| `git config --global user.name "Tu Nombre"` | Define tu nombre para los commits. |
-| `git config --global user.email "tu@email"` | Define tu email para los commits. |
-| `git config --global init.defaultBranch main` | Establece “main” como rama principal por defecto. |
-| `git config --global color.ui auto` | Activa colores en la línea de comandos. | 
-| `git config --global core.editor "code --wait"` | Define VS Code como editor para mensajes de commit, rebase, etc. |
-| `git config --global alias.st "status -sb"` | Alias útiles: estado corto. |
-| `git config --global alias.lg "log --oneline --graph --decorate --all"` | Alias: historial resumido y visual. |
+| `git config --global user.name "Tu Nombre"` | Define tu nombre para los commits |
+| `git config --global user.email "tu@email"` | Define tu email para los commits |
+| `git config --global init.defaultBranch main` | Establece “main” como rama principal por defecto |
+| `git config --global color.ui auto` | Activa colores en la línea de comandos | 
+| `git config --global core.editor "code --wait"` | Define VS Code como editor para mensajes de commit, rebase, etc |
+| `git config --global alias.st "status -sb"` | Alias útiles: estado corto |
+| `git config --global alias.lg "log --oneline --graph --decorate --all"` | Alias: historial resumido y visual |
 
 > Ver configuración: `git config --list --show-origin`
-
----
+<br>
 
 ## 🗂️ Iniciar y clonar repos
 | Comando | Descripción |
 |--------|-------------|
-| `git init` | Crea un repo Git en la carpeta actual. |
-| `git clone <url>` | Clona un repo remoto. |
-| `git remote -v` | Muestra remotos configurados. |
-| `git remote add origin <url>` | Añade remoto “origin”. |
-| `git remote set-url origin <url>` | Cambia la URL del remoto. |
-
----
+| `git init` | Crea un repo Git en la carpeta actual |
+| `git clone <url>` | Clona un repo remoto |
+| `git remote -v` | Muestra remotos configurados |
+| `git remote add origin <url>` | Añade remoto “origin” |
+| `git remote set-url origin <url>` | Cambia la URL del remoto |
+<br>
 
 ## 📦 Ciclo básico: status → add → commit
 | Comando | Descripción |
 |--------|-------------|
-| `git status` | Muestra estado del repositorio. |
-| `git status -sb` | Estado breve. |
-| `git diff` | Diferencias no preparadas. |
-| `git diff --staged` | Diferencias preparadas para commit. |
-| `git add <archivo>` | Añade archivo al staging. |
-| `git add .` | Añade todos los cambios. |
-| `git reset <archivo>` | Quita del staging, conserva cambios. |
-| `git commit -m "mensaje"` | Crea un commit. |
-| `git commit -am "mensaje"` | Añade y comitea archivos ya trackeados. |
-| `git commit --amend -m "nuevo mensaje"` | Edita el último commit. |
+| `git status` | Muestra estado del repositorio |
+| `git status -sb` | Estado breve |
+| `git diff` | Diferencias no preparadas |
+| `git diff --staged` | Diferencias preparadas para commit |
+| `git add <archivo>` | Añade archivo al staging |
+| `git add .` | Añade todos los cambios |
+| `git reset <archivo>` | Quita del staging, conserva cambios |
+| `git commit -m "mensaje"` | Crea un commit |
+| `git commit -am "mensaje"` | Añade y comitea archivos ya trackeados |
+| `git commit --amend -m "nuevo mensaje"` | Edita el último commit |
 
 Sugerencias para mensajes:
 - Línea 1: resumen imperativo breve.
 - Línea 2: en blanco.
 - Líneas siguientes: detalle y contexto si aplica.
-
----
+<br>
 
 ## 🔍 Historial y búsqueda
 | Comando | Descripción |
 |--------|-------------|
-| `git log --oneline` | Historial resumido. |
-| `git log --oneline --graph --decorate --all` | Historial visual. |
-| `git log -- <archivo>` | Historial de un archivo. |
-| `git blame <archivo>` | Quién cambió cada línea. |
-| `git reflog` | Registro de movimientos del HEAD. |
-
----
+| `git log --oneline` | Historial resumido |
+| `git log --oneline --graph --decorate --all` | Historial visual |
+| `git log -- <archivo>` | Historial de un archivo |
+| `git blame <archivo>` | Quién cambió cada línea |
+| `git reflog` | Registro de movimientos del HEAD |
+<br>
 
 ## 🌿 Ramas
 | Comando | Descripción |
 |--------|-------------|
-| `git branch` | Lista ramas locales. |
-| `git branch -r` | Lista ramas remotas. |
-| `git switch <rama>` | Cambia de rama. |
-| `git switch -c <rama>` | Crea y cambia a una nueva rama. |
-| `git branch -m <nuevo>` | Renombra la rama actual. |
-| `git branch -d <rama>` | Borra rama fusionada. |
-| `git branch -D <rama>` | Borra rama forzando. |
-| `git push -u origin <rama>` | Publica rama y establece seguimiento. |
-| `git switch --detach <hash>` | Cambia a un commit específico (detached HEAD). |
-
----
+| `git branch` | Lista ramas locales |
+| `git branch -r` | Lista ramas remotas |
+| `git switch <rama>` | Cambia de rama |
+| `git switch -c <rama>` | Crea y cambia a una nueva rama |
+| `git branch -m <nuevo>` | Renombra la rama actual |
+| `git branch -d <rama>` | Borra rama fusionada |
+| `git branch -D <rama>` | Borra rama forzando |
+| `git push -u origin <rama>` | Publica rama y establece seguimiento |
+| `git switch --detach <hash>` | Cambia a un commit específico (detached HEAD) |
+<br>
 
 ## 🔀 Integración: merge y rebase
 | Comando | Descripción |
 |--------|-------------|
-| `git merge <rama>` | Fusiona la rama en la rama actual. |
-| `git rebase <rama>` | Reaplica commits encima de otra rama. |
-| `git rebase -i origin/main` | Rebase interactivo para ordenar o “squash”. |
-| `git merge --abort` | Aborta un merge en conflicto. |
-| `git rebase --abort` | Aborta un rebase. |
-| `git merge --continue` | Continúa tras resolver conflictos. |
-| `git rebase --continue` | Continúa rebase tras conflictos. |
+| `git merge <rama>` | Fusiona la rama en la rama actual |
+| `git rebase <rama>` | Reaplica commits encima de otra rama |
+| `git rebase -i origin/main` | Rebase interactivo para ordenar o “squash” |
+| `git merge --abort` | Aborta un merge en conflicto |
+| `git rebase --abort` | Aborta un rebase |
+| `git merge --continue` | Continúa tras resolver conflictos |
+| `git rebase --continue` | Continúa rebase tras conflictos |
 
 Consejo:
 - Rebase: historial lineal antes de un PR.
 - Merge: conserva la historial tal cual sucedió.
-
----
+<br>
 
 ## ☁️ Remotos: fetch, pull, push
 | Comando | Descripción |
 |--------|-------------|
-| `git fetch` | Trae referencias remotas sin integrar. |
-| `git pull` | Fetch + merge en la rama actual. |
-| `git pull --rebase` | Fetch + rebase para historial limpio. |
-| `git push` | Envía commits al remoto. |
-| `git push -u origin <rama>` | Primer push y set de upstream. |
-| `git push origin --delete <rama>` | Borra rama remota. |
-
----
+| `git fetch` | Trae referencias remotas sin integrar |
+| `git pull` | Fetch + merge en la rama actual |
+| `git pull --rebase` | Fetch + rebase para historial limpio |
+| `git push` | Envía commits al remoto |
+| `git push -u origin <rama>` | Primer push y set de upstream |
+| `git push origin --delete <rama>` | Borra rama remota |
+<br>
 
 ## 🔄 Deshacer y recuperar
 | Comando | Descripción |
 |--------|-------------|
-| `git reset <archivo>` | Saca del staging, conserva cambios. |
-| `git reset --hard HEAD` | Deshace cambios locales y staging hasta el último commit. |
-| `git revert <hash>` | Crea un commit inverso seguro. |
-| `git restore <archivo>` | Restaura archivo desde último commit. |
-| `git restore --staged <archivo>` | Quita archivo del staging. |
+| `git reset <archivo>` | Saca del staging, conserva cambios |
+| `git reset --hard HEAD` | Deshace cambios locales y staging hasta el último commit |
+| `git revert <hash>` | Crea un commit inverso seguro |
+| `git restore <archivo>` | Restaura archivo desde último commit |
+| `git restore --staged <archivo>` | Quita archivo del staging |
 
 Cuándo usar:
 - `revert`: seguro en ramas compartidas.
 - `reset --hard`: destructivo, úsalo con cuidado.
 - `restore`: para archivos específicos.
-
----
+<br>
 
 ## 💼 Stash
 | Comando | Descripción |
 |--------|-------------|
-| `git stash push -m "WIP mensaje"` | Guarda cambios no confirmados. |
-| `git stash -u` | Incluye archivos no trackeados. |
-| `git stash list` | Lista stashes. |
-| `git stash pop` | Aplica y elimina el último stash. |
-| `git stash apply stash@{n}` | Aplica stash sin eliminarlo. |
-| `git stash drop stash@{n}` | Borra un stash concreto. |
-| `git stash clear` | Borra todos los stashes. |
-
----
+| `git stash push -m "WIP mensaje"` | Guarda cambios no confirmados |
+| `git stash -u` | Incluye archivos no trackeados |
+| `git stash list` | Lista stashes |
+| `git stash pop` | Aplica y elimina el último stash |
+| `git stash apply stash@{n}` | Aplica stash sin eliminarlo |
+| `git stash drop stash@{n}` | Borra un stash concreto |
+| `git stash clear` | Borra todos los stashes |
+<br>
 
 ## 🏷️ Tags
 | Comando | Descripción |
 |--------|-------------|
-| `git tag v1.0.0` | Crea un tag ligero. |
-| `git tag -a v1.0.0 -m "mensaje"` | Crea un tag anotado. |
-| `git tag --list` | Lista tags. |
-| `git show v1.0.0` | Muestra detalles del tag. |
-| `git push origin v1.0.0` | Envía un tag al remoto. |
-| `git push --tags` | Envía todos los tags. |
-| `git tag -d v1.0.0` | Borra tag local. |
-| `git push origin :refs/tags/v1.0.0` | Borra tag remoto. |
-
----
+| `git tag v1.0.0` | Crea un tag ligero |
+| `git tag -a v1.0.0 -m "mensaje"` | Crea un tag anotado |
+| `git tag --list` | Lista tags |
+| `git show v1.0.0` | Muestra detalles del tag |
+| `git push origin v1.0.0` | Envía un tag al remoto |
+| `git push --tags` | Envía todos los tags |
+| `git tag -d v1.0.0` | Borra tag local |
+| `git push origin :refs/tags/v1.0.0` | Borra tag remoto |
+<br>
 
 ## 🧹 .gitignore y limpieza
 | Comando | Descripción |
 |--------|-------------|
-| Crear `.gitignore` | Define archivos y carpetas a ignorar. |
-| `git config --global core.excludesfile ~/.gitignore_global` | Ignora patrones globalmente. |
-| `git clean -n` | Previsualiza limpiaza de no trackeados. |
-| `git clean -fd` | Elimina no trackeados y directorios. |
+| Crear `.gitignore` | Define archivos y carpetas a ignorar |
+| `git config --global core.excludesfile ~/.gitignore_global` | Ignora patrones globalmente |
+| `git clean -n` | Previsualiza limpiaza de no trackeados |
+| `git clean -fd` | Elimina no trackeados y directorios |
 
 Ejemplo `.gitignore`:
 ````
@@ -164,20 +154,17 @@ dist/
 .env
 .DS_Store
 ````
-
-
----
+<br>
 
 ## 🔐 GitHub por SSH
 | Comando | Descripción |
 |--------|-------------|
-| `ssh-keygen -t ed25519 -C "tu@email"` | Genera una clave SSH moderna. |
-| `eval "$(ssh-agent -s)"` | Inicia el agente SSH. |
-| `ssh-add ~/.ssh/id_ed25519` | Añade tu clave al agente. |
-| Copia la pública | `cat ~/.ssh/id_ed25519.pub` y pégala en GitHub → Settings → SSH and GPG keys. |
-| `ssh -T git@github.com` | Prueba la conexión SSH. |
-
----
+| `ssh-keygen -t ed25519 -C "tu@email"` | Genera una clave SSH moderna |
+| `eval "$(ssh-agent -s)"` | Inicia el agente SSH |
+| `ssh-add ~/.ssh/id_ed25519` | Añade tu clave al agente |
+| Copia la pública | `cat ~/.ssh/id_ed25519.pub` y pégala en GitHub → Settings → SSH and GPG keys |
+| `ssh -T git@github.com` | Prueba la conexión SSH |
+<br>
 
 ## 🧭 Recetas rápidas
 Inicializar repo y primer push:
@@ -212,17 +199,15 @@ git log --oneline
 git revert -m 1 <hash_merge> # -m indica el padre principal
 git push
 ```
-
----
+<br>
 
 # 💡 Ayuda
 | Comando | Descripción |
 |--------|-------------|
-| `git help <comando>` | Manual oficial en tu terminal. |
-| `<comando> --help` | Ayuda detallada del comando. |
-| Leer `git status` | Suele sugerir el siguiente paso. |
-
----
+| `git help <comando>` | Manual oficial en tu terminal |
+| `<comando> --help` | Ayuda detallada del comando |
+| Leer `git status` | Suele sugerir el siguiente paso |
+<br>
 
 # 📚 Glosario
 - **Branch (rama)**: línea de trabajo independiente dentro del repo. Permite desarrollar sin afectar a main.
